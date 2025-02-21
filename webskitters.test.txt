@@ -1,0 +1,31 @@
+1.SQL QUESTION
+if the where condition was applied before the JOIN:
+*only employees matching the date range would be considered for the JOIN.
+*department without any employees in that range would be completely removed from the result.
+*This effectively converts the left JOIN into an INNER JOIN an unmatched departments are eliminated.
+*Some departments that should have appeared with employee_count = 0 would no longer be included.
+
+3.PYTHON QUESTION 
+ 
+from collections import Counter
+import heapq
+
+def find_k_frequent_elements(nums,k):
+    if not nums or k == 0:
+        return []
+    
+    freq_map = Counter(nums)
+
+
+    min_heap = []
+    
+    for num, freq in freq_map.items():
+        heapq.heappush(min_heap, (freq, num))
+        if len(min_heap) > k:
+            heapq.heappop(min_heap)
+    
+    return [num for freq,num in min_heap]
+
+nums = [1, 1, 1, 2, 2, 3]
+k = 2
+print(find_k_frequent_elements(nums, k)
